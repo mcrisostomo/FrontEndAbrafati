@@ -1,0 +1,38 @@
+<div class="login-box">
+  <div class="login-logo">
+    <img src="dist/img/logotipo-abrafati.png">
+  </div>
+  <div class="login-box-body">
+    <div class="alert alert-danger" role="alert" ng-if="showErrorBox">
+      <i class="fa fa-times fa-fw"></i> {{errorMessage}}
+    </div>
+    <form>
+      <div class="form-group has-feedback" ng-class="hasEmailError ? 'has-error' : ''">
+        <input type="email" class="form-control" placeholder="E-mail" ng-model="email">
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback" ng-class="hasPasswordError ? 'has-error' : ''">
+        <input type="password" class="form-control" placeholder="Senha" ng-model="password">
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="row">
+        <div class="col-xs-8">
+          <div class="checkbox icheck">
+            <label>
+              <input type="checkbox"> Lembrar de mim
+            </label>
+          </div>
+        </div>
+        <div class="col-xs-4">
+          <button type="submit" class="btn btn-primary btn-block btn-flat" ng-click="loginButton()">Login</button>
+        </div>
+        <div class="col-md-12">
+          <a href="#/forgot-password">Esqueci minha senha</a>
+        </div>
+        <div class="col-md-12">
+          <a href="#/register" class="text-center">Registro de novo membro</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

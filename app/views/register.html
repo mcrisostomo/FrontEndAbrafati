@@ -1,0 +1,40 @@
+<div class="register-box">
+  <div class="register-logo">
+    <img src="dist/img/logotipo-abrafati.png">
+  </div>
+  <div class="register-box-body">
+    <div class="alert" ng-class="typeMessage()" role="alert" ng-if="showErrorBox">
+      <i class="fa fa-fw" ng-class="typeIconMessage()"></i> {{errorMessage}}
+    </div>
+    <form>
+      <div class="form-group has-feedback" ng-class="hasFullNameError ? 'has-error' : ''">
+        <input type="text" class="form-control" placeholder="Nome Completo" ng-model="fullName">
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback" ng-class="hasEmailError ? 'has-error' : ''">
+        <input type="email" class="form-control" placeholder="E-mail" ng-model="email">
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback" ng-class="hasPasswordError ? 'has-error' : ''">
+        <input type="password" class="form-control" placeholder="Senha" ng-model="password">
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback" ng-class="hasConfirmPasswordError ? 'has-error' : ''">
+        <input type="password" class="form-control" placeholder="Confirme a Senha" ng-model="confirmPassword">
+        <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+      </div>
+      <div class="row">
+        <div class="col-xs-8">
+          <div class="checkbox icheck">
+            <label>
+              <a href="#/login" class="text-center">Já sou cadastrado</a>
+            </label>
+          </div>
+        </div>
+        <div class="col-xs-4">
+          <button type="submit" class="btn btn-primary btn-block btn-flat" ng-click="signUp()">Cadastrar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

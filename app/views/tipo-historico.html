@@ -1,0 +1,86 @@
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>Visualização de Tipo de Histórico</h1>
+    <ol class="breadcrumb">
+      <li><a href=""><i class="fa fa-home"></i> Home</a></li>
+      <li><a href=""><i class="fa fa-table"></i> Tabelas</a></li>
+      <li class="active"><i class="fa fa-undo"></i> Tipo de Histórico</li>
+    </ol>
+  </section>
+
+  <section class="content">
+    <div class="box">
+      <div class="box-header with-border text-right">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-tipo" ng-click="novoTipo()">
+          <i class="fa fa-plus fa-fw"></i> Incluir Novo Tipo de Histórico
+        </button>
+      </div>
+      <div class="box-body">
+        <table id="tblTipo" class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Descrição</th>
+              <th>Alterar</th>
+              <th>Excluir</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="tipo in listaTipo">
+              <td>{{tipo.id}}</td>
+              <td>{{tipo.descricao | uppercase}}</td>
+              <td><a href="" ng-click="editarTipo()" data-toggle="modal" data-target="#modal-tipo"><i class="fa fa-edit"></i></a></td>
+              <td><a href="" ng-click="excluirTipo()" data-toggle="modal" data-target="#excluir-tipo"><i class="fa fa-times"></i></a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <div class="modal fade" id="modal-tipo">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">{{tituloModal}}</h4>
+        </div>
+        <div class="modal-body row">
+          <div class="col-md-12" ng-show="false">
+            <label>ID</label>
+            <input type="text" class="form-control" ng-model="idTipo">
+          </div>
+          <div class="col-md-12">
+            <label>Descrição</label>
+            <input type="text" class="form-control" ng-model="descricaoTipo">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="fecharModal()">Fechar</button>
+          <button type="button" class="btn btn-primary" ng-click="salvarTipo()">Salvar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="excluir-tipo">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">{{tituloModal}}</h4>
+        </div>
+        <div class="modal-body">
+          <h3>Tem certeza?</h3>
+          <p>Esta ação não poderá ser desfeita após a confirmação.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Não</button>
+          <button type="button" class="btn btn-primary" ng-click="confirmarExcluirTipo()">Sim</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

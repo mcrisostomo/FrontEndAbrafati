@@ -1,0 +1,1511 @@
+<div class="box" ng-controller="consulta-empresa-controller">
+  <div class="box-header with-border">
+    <h3 class="box-title">Consulta de empresa</h3>
+  </div>
+  <div class="box-body">
+    <div class="form-group">
+      <div class="input-group">
+        <input id="txtEmpresa" class="form-control" type="text" placeholder="Buscar empresa" ng-model="buscaEmpresa">
+        <div class="input-group-addon">
+          <a href="" ng-click="exibeEmpresa()"><i class="fa fa-search"></i></a>
+        </div>
+      </div>
+    </div>
+    <ul class="list-inline">
+      <li ng-repeat="lista in filter"><a href="" ng-click="filtroEmpresa()">{{lista | uppercase}}</a></li>
+    </ul>
+  </div>
+  <div class="box-footer" ng-show="resultadoEmpresa">
+    <table id="tblListaEmpresas" class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>Razão Social</th>
+          <th>Nome Fantasia</th>
+          <th>CNPJ</th>
+          <th>Site</th>
+          <th>Cidade</th>
+          <th>País</th>
+          <th>UF</th>
+          <th>Internacional</th>
+          <th>Ver Dados</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="empresa in pesquisaEmpresas">
+          <td>{{empresa.razaoSocial | uppercase}}</td>
+          <td>{{empresa.nomeFantasia | uppercase}}</td>
+          <td>{{empresa.cnpj | uppercase}}</td>
+          <td>{{empresa.site}}</td>
+          <td>{{empresa.cidade | uppercase}}</td>
+          <td>{{empresa.pais | uppercase}}</td>
+          <td>{{empresa.uf | uppercase}}</td>
+          <td>{{empresa.internacional | uppercase}}</td>
+          <td><a href="" ng-click="verEmpresa(empresa.id)" data-toggle="modal" data-target="#modal-verEmpresa"><i class="fa fa-eye"></i></a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="modal fade" id="modal-verEmpresa">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="fecharModalEmpresa()">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">{{tituloModal}}</h4>
+        </div>
+        <div class="modal-body row">
+          <div class="col-md-12" id="accordion">
+            <div class="box box-info box-solid card">
+              <div class="box-header with-border card-header collapsed" id="headingOne" data-toggle="collapse"
+                data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                <h3 class="box-title">Cadastro da Empresa <i class="fa fa-angle-down"></i></h3>
+              </div>
+              <div id="collapseOne" class="box-body collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="col-md-10 form-group" ng-if="false">
+                  <label>ID Empresa</label>
+                  <br>
+                  <input type="text" class="form-control" ng-model="detalheIdEmpresa">
+                </div>
+                <div class="col-md-10 form-group">
+                  <label>Razão Social</label>
+                  <br>
+                  {{detalheRazaoSocial | uppercase}}
+                </div>
+                <div class="col-md-2 text-right">
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-editarEmpresa"
+                    ng-click="editarEmpresa(detalheIdEmpresa)"><i class="fa fa-edit"></i></button>
+                </div>
+                <div class="col-md-12 form-group">
+                  <label>Nome Fantasia</label>
+                  <br>
+                  {{detalheNomeFantasia | uppercase}}
+                </div>
+                <div class="col-md-6 col-xs-12 form-group">
+                  <label>Grupo</label>
+                  <br>
+                  {{detalheGrupo | uppercase}}
+                </div>
+                <div class="col-md-6 col-xs-12 form-group">
+                  <label>Categoria</label>
+                  <br>
+                  <span ng-repeat="categorias in detalheEmpresa[0].categoria">{{categorias.tipoCategoria | uppercase}}
+                    <br></span>
+                </div>
+                <div class="col-md-6 col-xs-12 form-group">
+                  <label>Classificação</label>
+                  <br>
+                  {{detalheClassificacao | uppercase}}
+                </div>
+                <div class="col-md-6 col-xs-12 form-group">
+                  <label>CNPJ</label>
+                  <br>
+                  {{detalheCNPJ | uppercase}}
+                </div>
+                <div class="col-md-6 col-xs-12 form-group">
+                  <label>Segmento</label>
+                  <br>
+                  <span ng-repeat="segmentos in detalheEmpresa[0].segmento">{{segmentos.tipoSegmento | uppercase}} <br></span>
+                </div>
+                <div class="col-md-6 col-xs-12 form-group">
+                  <label>DDI</label>
+                  <br>
+                  {{detalheDDI | uppercase}}
+                </div>
+                <div class="col-md-6 col-xs-12 form-group">
+                  <label>Telefone 1</label>
+                  <br>
+                  {{detalheTelefone1 | uppercase}}
+                </div>
+                <div class="col-md-6 col-xs-12 form-group">
+                  <label>Telefone 2</label>
+                  <br>
+                  {{detalheTelefone2 | uppercase}}
+                </div>
+                <div class="col-md-6 col-xs-12 form-group">
+                  <label>Fax</label>
+                  <br>
+                  {{detalheFax | uppercase}}
+                </div>
+                <div class="col-md-6 col-xs-12 form-group">
+                  <label>Internacional</label>
+                  <br>
+                  {{detalheInternacional | uppercase}}
+                </div>
+                <div class="col-md-6 col-xs-12 form-group">
+                  <label>Ativo</label>
+                  <br>
+                  {{detalheAtivo | uppercase}}
+                </div>
+                <div class="col-md-12 form-group">
+                  <label>Endereço</label>
+                  <br>
+                  {{detalheEndereco | uppercase}}
+                </div>
+                <div class="col-md-12 form-group">
+                  <label>Site</label>
+                  <br>
+                  {{detalheSite}}
+                </div>
+                <div class="col-md-6 col-xs-12 form-group">
+                  <label>Data Cadastro</label>
+                  <br>
+                  {{detalheDataCadastro}}
+                </div>
+                <div class="col-md-6 col-xs-12 form-group">
+                  <label>Data Alteração</label>
+                  <br>
+                  {{detalheDataAlteracao}}
+                </div>
+                <div class="col-md-12 form-group">
+                  <label>Observação</label>
+                  <br>
+                  {{detalheObservacao | uppercase}}
+                </div>
+              </div>
+            </div>
+
+            <div class="box box-info box-solid card">
+              <div class="box-header with-border card-header collapsed" id="headingTwo" data-toggle="collapse"
+                data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                <h3 class="box-title">Contatos <i class="fa fa-angle-down"></i></h3>
+              </div>
+              <div id="collapseTwo" class="box-body collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div class="col-md-12 form-group text-right">
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-adicionarContato"
+                    ng-click="adicionarContato()"><i class="fa fa-user-plus fa-fw"></i> Adicionar Contato</button>
+                </div>
+                <div class="col-md-12">
+                  <table id="tblListaContatos" class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th>Nome</th>
+                        <th>Cargo</th>
+                        <th>Área</th>
+                        <th>Título</th>
+                        <th>Status</th>
+                        <th>Editar</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="contato in pesquisaContatos">
+                        <td>{{contato.nome | uppercase}}</td>
+                        <td>{{contato.cargo | uppercase}}</td>
+                        <td>{{contato.area | uppercase}}</td>
+                        <td>{{contato.titulo | uppercase}}</td>
+                        <td>{{contato.status | uppercase}}</td>
+                        <td><a href="" ng-click="editarContato(contato.id)" data-toggle="modal" data-target="#modal-adicionarContato"><i
+                              class="fa fa-edit"></i></a></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="box box-info box-solid card">
+              <div class="box-header with-border card-header collapsed" id="headingThree" data-toggle="collapse"
+                data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                <h3 class="box-title">Comissões - Gts Grupos de Trabalhos <i class="fa fa-angle-down"></i></h3>
+              </div>
+              <div id="collapseThree" class="box-body collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                <div class="col-md-12">
+                  <table id="tblListaComissao" class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th>Código</th>
+                        <th>Comissão</th>
+                        <th>Contato</th>
+                        <th>Ver Contato</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="comissao in pesquisaComissao">
+                        <td>{{comissao.codigo | uppercase}}</td>
+                        <td>{{comissao.comissao | uppercase}}</td>
+                        <td>{{comissao.contato | uppercase}}</td>
+                        <td><a href="" ng-click="verComissao(comissao.id)" data-toggle="modal" data-target="#modal-adicionarContato"><i
+                              class="fa fa-edit"></i></a></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="box box-info box-solid card">
+              <div class="box-header with-border card-header collapsed" id="headingFour" data-toggle="collapse"
+                data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                <h3 class="box-title">Eventos <i class="fa fa-angle-down"></i></h3>
+              </div>
+              <div id="collapseFour" class="box-body collapse" aria-labelledby="headingFour" data-parent="#accordion">
+                <div class="col-md-12 form-group text-right">
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-adicionarEvento"
+                    ng-click="adicionarEvento()"><i class="fa fa-calendar-plus-o fa-fw"></i> Adicionar Evento</button>
+                </div>
+                <div class="col-md-12">
+                  <table id="tblListaEventos" class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th>Evento</th>
+                        <th>Categoria</th>
+                        <th>Sub-Categoria</th>
+                        <th>Setor</th>
+                        <th>M2</th>
+                        <th>Pavilhão</th>
+                        <th>Mês Venda</th>
+                        <th>Editar</th>
+                        <th>Excluir</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="evento in pesquisaEventos">
+                        <td>{{evento.evento | uppercase}}</td>
+                        <td>{{evento.categoria | uppercase}}</td>
+                        <td>{{evento.subCategoria | uppercase}}</td>
+                        <td>{{evento.setor | uppercase}}</td>
+                        <td>{{evento.m2 | uppercase}}</td>
+                        <td>{{evento.pavilhao | uppercase}}</td>
+                        <td>{{evento.mesVenda | uppercase}}</td>
+                        <td><a href="" ng-click="editarEvento(evento.id)" data-toggle="modal" data-target="#modal-adicionarEvento"><i
+                              class="fa fa-edit"></i></a></td>
+                        <td><a href="" ng-click="excluirEvento(evento.id)" data-toggle="modal" data-target="#modal-excluirEvento"><i
+                              class="fa fa-times"></i></a></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="box box-info box-solid card">
+              <div class="box-header with-border card-header collapsed" id="headingFive" data-toggle="collapse"
+                data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                <h3 class="box-title">Telemarketing <i class="fa fa-angle-down"></i></h3>
+              </div>
+              <div id="collapseFive" class="box-body collapse" aria-labelledby="headingFive" data-parent="#accordion">
+                <div class="card-body">
+                  <div class="col-md-12 form-group text-right">
+                    <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-editarEmpresa"><i
+                        class="fa fa-forward fa-fw"></i> Próximo Telemarketing</button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-editarEmpresa"><i
+                        class="fa fa-check-square fa-fw"></i> Selecionar Campanha</button> -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-adicionarTeleMarketing"
+                      ng-click="adicionarTeleMKT()"><i class="fa fa-phone fa-fw"></i> Adicionar</button>
+                  </div>
+                  <div class="col-md-12">
+                    <table id="tblListaTeleMKT" class="table table-bordered table-hover">
+                      <thead>
+                        <tr>
+                          <th>Data</th>
+                          <th>Campanha</th>
+                          <th>Status</th>
+                          <th>Agendamento</th>
+                          <th>Finalizado</th>
+                          <th>Usuario</th>
+                          <th>Editar</th>
+                          <th>Excluir</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="teleMkt in pesquisaTeleMKT">
+                          <td>{{teleMkt.data | uppercase}}</td>
+                          <td>{{teleMkt.campanha | uppercase}}</td>
+                          <td>{{teleMkt.status | uppercase}}</td>
+                          <td>{{teleMkt.agendamento | uppercase}}</td>
+                          <td>{{teleMkt.finalizado | uppercase}}</td>
+                          <td>{{teleMkt.usuario | uppercase}}</td>
+                          <td><a href="" ng-click="editarTeleMKT(teleMkt.id)" data-toggle="modal" data-target="#modal-adicionarTeleMarketing"><i
+                                class="fa fa-edit"></i></a></td>
+                          <td><a href="" ng-click="excluirTeleMKT(teleMkt.id)" data-toggle="modal" data-target="#modal-excluirTeleMarketing"><i
+                                class="fa fa-times"></i></a></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="box box-info box-solid card">
+              <div class="box-header with-border card-header collapsed" id="headingSix" data-toggle="collapse"
+                data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                <h3 class="box-title">Histórico <i class="fa fa-angle-down"></i></h3>
+              </div>
+              <div id="collapseSix" class="box-body collapse" aria-labelledby="headingSix" data-parent="#accordion">
+                <div class="col-md-12 form-group text-right">
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-adicionarHistoricoContato"
+                    ng-click="adicionarHistorico()"><i class="fa fa-history fa-fw"></i> Adicionar</button>
+                </div>
+                <div class="col-md-12">
+                  <table id="tblListaHistorico" class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th>Data</th>
+                        <th>Tipo</th>
+                        <th>Campanha</th>
+                        <th>Editar</th>
+                        <th>Excluir</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="historico in pesquisaHistorico">
+                        <td>{{historico.data | uppercase}}</td>
+                        <td>{{historico.tipo | uppercase}}</td>
+                        <td>{{historico.campanha | uppercase}}</td>
+                        <td><a href="" ng-click="editarHistorico(historico.id)" data-toggle="modal" data-target="#modal-adicionarHistoricoContato"><i
+                              class="fa fa-edit"></i></a></td>
+                        <td><a href="" ng-click="excluirHistorico(historico.id)" data-toggle="modal" data-target="#modal-excluirHistoricoContato"><i
+                              class="fa fa-times"></i></a></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="fecharModalEmpresa()">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal-editarEmpresa">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Editar Empresa</h4>
+        </div>
+        <div class="modal-body row">
+          <div class="col-md-12">
+            <h3 class="box-title">Tipo de empresa</h3>
+            <div class="col-md-6 col-xs-12 form-group" ng-repeat="tipo in tipoEmpresa">
+              <label>{{tipo.tipo}}</label>
+              <select class="form-control select2" multiple="multiple" data-placeholder="">
+                <option value=""></option>
+                <option ng-repeat="detalhe in tipo.detalhe" value="{{detalhe.id}}">{{detalhe.descricao}}</option>
+              </select>
+            </div>
+
+            <div class="col-md-6 col-xs-12 form-group">
+              <label>Upload de Logo</label>
+              <input type="file" ng-model="uploadLogo">
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <h3 class="box-title">Dados Cadastrais</h3>
+            <div class="col-md-6 col-xs-12 form-group">
+              <label>Razão Social</label>
+              <input type="text" class="form-control" ng-model="razaoSocial">
+            </div>
+            <div class="col-md-6 col-xs-12 form-group">
+              <label>Nome Fantasia</label>
+              <input type="text" class="form-control" ng-model="nomeFantasia">
+            </div>
+            <div class="col-md-6 col-xs-12 form-group">
+              <label>CEP</label>
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="00000-000" ng-model="cep">
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-info btn-flat" ng-click="buscaCep()">Consultar</button>
+                </span>
+              </div>
+            </div>
+            <div class="col-md-6 col-xs-12 form-group">
+              <label>País</label>
+              <input type="text" class="form-control" ng-model="pais">
+            </div>
+            <div class="col-md-2 col-xs-12 form-group">
+              <label>Tipo Logradouro</label>
+              <input type="text" class="form-control" ng-model="tipoLogradouro">
+            </div>
+            <div class="col-md-4 col-xs-12 form-group">
+              <label>Logradouro</label>
+              <input type="text" class="form-control" ng-model="logradouro">
+            </div>
+            <div class="col-md-3 col-xs-12 form-group" ng-model="numero">
+              <label>Número</label>
+              <input type="text" class="form-control">
+            </div>
+            <div class="col-md-3 col-xs-12 form-group">
+              <label>Complemento</label>
+              <input type="text" class="form-control" ng-model="complemento">
+            </div>
+            <div class="col-md-6 col-xs-12 form-group">
+              <label>Bairro</label>
+              <input type="text" class="form-control" ng-model="bairro">
+            </div>
+            <div class="col-md-3 col-xs-12 form-group">
+              <label>Cidade</label>
+              <input type="text" class="form-control" ng-model="cidade">
+            </div>
+            <div class="col-md-3 col-xs-12 form-group">
+              <label>UF</label>
+              <select class="form-control" ng-model="uf" ng-options="estado as estado.sigla for estado in uf"></select>
+            </div>
+            <div class="col-md-6 col-xs-12 form-group">
+              <label>Internacional</label>
+              <br>
+              <label><input type="radio" name="optint"> Sim</label> &nbsp;&nbsp;&nbsp;
+              <label><input type="radio" name="optint"> Não</label>
+            </div>
+            <div class="col-md-6 col-xs-12 form-group">
+              <label>DDI</label>
+              <input type="text" class="form-control" ng-model="ddi">
+            </div>
+            <div class="col-md-6 col-xs-12 form-group">
+              <label>Telefone 1</label>
+              <div class="row">
+                <div class="col-md-2">
+                  <input type="text" class="form-control" placeholder="00" ng-model="dddTel1">
+                </div>
+                <div class="col-md-6">
+                  <input type="text" class="form-control" placeholder="0000-0000" ng-model="telefone1">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-xs-12 form-group">
+              <label>Telefone 2</label>
+              <div class="row">
+                <div class="col-md-2">
+                  <input type="text" class="form-control" placeholder="00" ng-model="dddTel2">
+                </div>
+                <div class="col-md-6">
+                  <input type="text" class="form-control" placeholder="0000-0000" ng-model="telefone2">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-xs-12 form-group">
+              <label>Celular 1</label>
+              <div class="row">
+                <div class="col-md-2">
+                  <input type="text" class="form-control" placeholder="00" ng-model="dddCel1">
+                </div>
+                <div class="col-md-6">
+                  <input type="text" class="form-control" placeholder="0000-0000" ng-model="celular1">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-xs-12 form-group">
+              <label>Celular 2</label>
+              <div class="row">
+                <div class="col-md-2">
+                  <input type="text" class="form-control" placeholder="00" ng-model="dddCel2">
+                </div>
+                <div class="col-md-6">
+                  <input type="text" class="form-control" placeholder="0000-0000" ng-model="celular2">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-xs-12 form-group">
+              <label>Fax</label>
+              <div class="row">
+                <div class="col-md-2">
+                  <input type="text" class="form-control" placeholder="00" ng-model="dddFax">
+                </div>
+                <div class="col-md-6">
+                  <input type="text" class="form-control" placeholder="0000-0000" ng-model="fax">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-xs-12 form-group">
+              <label>Grupos</label>
+              <select class="form-control" ng-model="tipoGrupo" ng-options="grupo as grupo.tipoGrupo for grupo in gruposEmpresa"></select>
+            </div>
+            <div class="col-md-6 col-xs-12 form-group">
+              <label>Outro Grupo</label>
+              <input type="text" class="form-control" ng-model="outroGrupo" ng-disabled="habilitaOutroGrupo(grupo)">
+            </div>
+            <div class="col-md-6 col-xs-12 form-group">
+              <label>Classificação</label>
+              <select class="form-control" ng-model="classificacao" ng-options="classific as classific.tipoClassificacao for classific in classificacaoGrupo"
+                ng-disabled="habilitaClassificacao()"></select>
+            </div>
+            <div class="col-md-6 col-xs-12 form-group">
+              <label>Site</label>
+              <input type="text" class="form-control" ng-model="site">
+            </div>
+            <div class="col-md-6 col-xs-12 form-group">
+              <label>Coligada</label>
+              <select class="form-control" ng-model="coligada" ng-options="coligada as coligada.coligada for coligada in coligada"></select>
+            </div>
+            <div class="col-md-6 col-xs-12 form-group">
+              <label>Observação</label>
+              <input type="text" class="form-control" ng-model="observacao">
+            </div>
+            <div class="col-md-6 col-xs-12 form-group">
+              <label>Ativo</label>
+              <select class="form-control" ng-model="ativo" ng-options="ativo as ativo.opcao for ativo in ativo"></select>
+            </div>
+            <div class="col-md-6 col-xs-12 form-group">
+              <label>Motivo Inativação</label>
+              <select class="form-control" ng-model="motivoInativacao" ng-options="motivo as motivo.opcao for motivo in motivoInativacao"></select>
+            </div>
+            <div class="col-md-6 col-xs-12 form-group">
+              <label>Data Inativação</label>
+              <div class="input-group date">
+                <div class="input-group-addon">
+                  <i class="fa fa-calendar"></i>
+                </div>
+                <input type="text" class="form-control pull-right" id="datepickerInativacao" ng-model="dataInativacao">
+              </div>
+            </div>
+            <div class="col-md-6 col-xs-12 form-group">
+              <label>LinkedIn</label>
+              <input type="text" class="form-control" ng-model="linkedin">
+            </div>
+            <div class="col-md-6 col-xs-12 form-group">
+              <label>Facebook</label>
+              <input type="text" class="form-control" ng-model="facebook">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
+          <button type="button" class="btn btn-primary pull-right" data-dismiss="modal">Salvar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal-adicionarContato">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="fecharModalContato()">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">{{modalContato}}</h4>
+        </div>
+        <div class="modal-body row">
+          <div class="col-md-12" id="contatoAccordion">
+            <div class="box box-info box-solid card">
+              <div class="box-header with-border card-header collapsed" id="contatoHeadingOne" data-toggle="collapse"
+                data-target="#contatoCollapseOne" aria-expanded="false" aria-controls="contatoCollapseOne">
+                <h3 class="box-title">Empresa <i class="fa fa-angle-down"></i></h3>
+              </div>
+              <div id="contatoCollapseOne" class="box-body collapse" aria-labelledby="contatoHeadingOne" data-parent="#contatoAccordion">
+                <div class="col-md-6 form-group">
+                  <label>Contato de Empresa</label>
+                  <br>
+                  <label><input type="radio" name="optContato"> Sim</label> &nbsp;&nbsp;&nbsp;
+                  <label><input type="radio" name="optContato"> Não</label>
+                </div>
+                <div class="col-md-6 form-group">
+                  <label>Empresa</label>
+                  <select class="form-control" ng-disabled="empresanao" ng-model="contatoEmpresa"></select>
+                </div>
+              </div>
+            </div>
+
+            <div class="box box-info box-solid card">
+              <div class="box-header with-border card-header collapsed" id="contatoHeadingTwo" data-toggle="collapse"
+                data-target="#contatoCollapseTwo" aria-expanded="false" aria-controls="contatoCollapseTwo">
+                <h3 class="box-title">Dados Pessoais <i class="fa fa-angle-down"></i></h3>
+              </div>
+              <div id="contatoCollapseTwo" class="box-body collapse" aria-labelledby="contatoHeadingTwo" data-parent="#contatoAccordion">
+                <div class="col-md-6 col-xs-12 form-group">
+                  <label>Tratamento</label>
+                  <select class="form-control" ng-model="tipoTratamento" ng-options="tratamento as tratamento.tratamento for tratamento in tipoTratamento"></select>
+                </div>
+                <div class="col-md-6 col-xs-12 form-group">
+                  <label>Nome Completo</label>
+                  <input type="text" class="form-control">
+                </div>
+                <div class="col-md-12 col-xs-12 form-group">
+                  <label>Sexo</label>
+                  <br>
+                  <label><input type="radio" name="optSexo"> Masculino</label> &nbsp;&nbsp;&nbsp;
+                  <label><input type="radio" name="optSexo"> Ferminino</label>
+                </div>
+                <br>
+                <div class="col-md-6 col-xs-12 form-group">
+                  <label>Cargo</label>
+                  <select class="form-control">
+                    <option value="0">Selecione</option>
+                  </select>
+                </div>
+                <div class="col-md-6 col-xs-12 form-group">
+                  <label>Área</label>
+                  <select class="form-control">
+                    <option value="0">Selecione</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="box box-info box-solid card">
+              <div class="box-header with-border card-header collapsed" id="contatoHeadingThree" data-toggle="collapse"
+                data-target="#contatoCollapseThree" aria-expanded="false" aria-controls="contatoCollapseThree">
+                <h3 class="box-title">Endereço <i class="fa fa-angle-down"></i></h3>
+              </div>
+              <div id="contatoCollapseThree" class="box-body collapse" aria-labelledby="contatoHeadingThree"
+                data-parent="#contatoAccordion">
+                <div class="col-md-6 col-xs-12 form-group">
+                  <label>CEP</label>
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="00000-000">
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-info btn-flat">Não sei meu CEP</button>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-md-6 col-xs-12 form-group">
+                  <label>País</label>
+                  <input type="text" class="form-control">
+                </div>
+                <div class="col-md-6 col-xs-12 form-group">
+                  <div class="row">
+                    <div class="col-md-4 col-xs-12">
+                      <label>Tipo Logradouro</label>
+                      <select class="form-control">
+                        <option value="0">Selecione</option>
+                      </select>
+                    </div>
+                    <div class="col-md-8 col-xs-12 ">
+                      <label>Logradouro</label>
+                      <input type="text" class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-xs-12 form-group">
+                  <div class="row">
+                    <div class="col-md-6 col-xs-12 ">
+                      <label>Número</label>
+                      <input type="text" class="form-control">
+                    </div>
+                    <div class="col-md-6 col-xs-12 ">
+                      <label>Complemento</label>
+                      <input type="text" class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-xs-12 form-group">
+                  <label>Bairro</label>
+                  <input type="text" class="form-control">
+                </div>
+                <div class="col-md-6 col-xs-12 form-group">
+                  <div class="row">
+                    <div class="col-md-6 col-xs-12 ">
+                      <label>Cidade</label>
+                      <input type="text" class="form-control">
+                    </div>
+                    <div class="col-md-6 col-xs-12 ">
+                      <label>UF</label>
+                      <select class="form-control">
+                        <option value="0">Selecione</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="box box-info box-solid card">
+              <div class="box-header with-border card-header collapsed" id="contatoHeadingFour" data-toggle="collapse"
+                data-target="#contatoCollapseFour" aria-expanded="false" aria-controls="contatoCollapseFour">
+                <h3 class="box-title">Contato <i class="fa fa-angle-down"></i></h3>
+              </div>
+              <div id="contatoCollapseFour" class="box-body collapse" aria-labelledby="contatoHeadingFour" data-parent="#contatoAccordion">
+                <div class="col-md-6 col-xs-12 form-group">
+                  <label>Internacional</label>
+                  <br>
+                  <label><input type="radio" name="optint"> Sim</label> &nbsp;&nbsp;&nbsp;
+                  <label><input type="radio" name="optint"> Não</label>
+                </div>
+                <div class="col-md-6 col-xs-12 form-group">
+                  <label>DDI</label>
+                  <input type="text" class="form-control">
+                </div>
+                <div class="col-md-6 col-xs-12 form-group">
+                  <label>Telefone 1</label>
+                  <div class="row">
+                    <div class="col-md-2 ">
+                      <input type="text" class="form-control" placeholder="00">
+                    </div>
+                    <div class="col-md-6 ">
+                      <input type="text" class="form-control" placeholder="00000-0000">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-xs-12 form-group">
+                  <label>Telefone 2</label>
+                  <div class="row">
+                    <div class="col-md-2 ">
+                      <input type="text" class="form-control" placeholder="00">
+                    </div>
+                    <div class="col-md-6 ">
+                      <input type="text" class="form-control" placeholder="00000-0000">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-xs-12 form-group">
+                  <label>Celular 1</label>
+                  <div class="row">
+                    <div class="col-md-2 ">
+                      <input type="text" class="form-control" placeholder="00">
+                    </div>
+                    <div class="col-md-6 ">
+                      <input type="text" class="form-control" placeholder="00000-0000">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-xs-12 form-group">
+                  <label>Celular 2</label>
+                  <div class="row">
+                    <div class="col-md-2 ">
+                      <input type="text" class="form-control" placeholder="00">
+                    </div>
+                    <div class="col-md-6 ">
+                      <input type="text" class="form-control" placeholder="00000-0000">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12 col-xs-12 form-group">
+                  <div class="row">
+                    <div class="col-md-6 col-xs-12 form-group">
+                      <label>Fax</label>
+                      <div class="row">
+                        <div class="col-md-2 ">
+                          <input type="text" class="form-control" placeholder="00">
+                        </div>
+                        <div class="col-md-6 ">
+                          <input type="text" class="form-control" placeholder="00000-0000">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-xs-12 form-group">
+                  <div class="row">
+                    <div class="col-md-6 col-xs-12 form-group">
+                      <label>E-mail 1</label>
+                      <input type="text" class="form-control" placeholder="email@provedor.com.br">
+                    </div>
+                    <div class="col-md-6 col-xs-12 form-group">
+                      <label>Validar E-mail 1</label>
+                      <br>
+                      <label><input type="radio" name="opte1"> Sim</label> &nbsp;&nbsp;&nbsp;
+                      <label><input type="radio" name="opte1"> Não</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-xs-12 form-group">
+                  <div class="row">
+                    <div class="col-md-6 col-xs-12 form-group">
+                      <label>E-mail 2</label>
+                      <input type="text" class="form-control" placeholder="email@provedor.com.br">
+                    </div>
+                    <div class="col-md-6 col-xs-12 form-group">
+                      <label>Validar E-mail 2</label>
+                      <br>
+                      <label><input type="radio" name="opte2"> Sim</label> &nbsp;&nbsp;&nbsp;
+                      <label><input type="radio" name="opte2"> Não</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-xs-12 form-group">
+                  <label>Email Output</label>
+                  <br>
+                  <input type="checkbox" id="chkOutput">
+                </div>
+                <div class="col-md-6 col-xs-12 form-group">
+                  <label>LinkedIn</label>
+                  <input type="text" class="form-control">
+                </div>
+                <div class="col-md-12 col-xs-12 form-group">
+                  <div class="row">
+                    <div class="col-md-6 col-xs-12 form-group">
+                      <label>Facebook</label>
+                      <input type="text" class="form-control" placeholder="https://www.facebook.com/nome-usuario">
+                    </div>
+                    <div class="col-md-6 col-xs-12 form-group">
+                      <label>Foto</label>
+                      <input type="file">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="box box-info box-solid card">
+              <div class="box-header with-border card-header collapsed" id="contatoHeadingFive" data-toggle="collapse"
+                data-target="#contatoCollapseFive" aria-expanded="false" aria-controls="contatoCollapseFive">
+                <h3 class="box-title">Demais Dados <i class="fa fa-angle-down"></i></h3>
+              </div>
+              <div id="contatoCollapseFive" class="box-body collapse" aria-labelledby="contatoHeadingFive" data-parent="#contatoAccordion">
+                <div class="card-body">
+                  <div class="col-md-6 col-xs-12 form-group">
+                    <label>CPF</label>
+                    <input type="text" class="form-control" placeholder="000.000.000-00">
+                  </div>
+                  <div class="col-md-6 col-xs-12 form-group">
+                    <label>Data de Nascimento</label>
+                    <div class="input-group date">
+                      <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                      </div>
+                      <input type="text" class="form-control pull-right" id="datepickerDataNasc">
+                    </div>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <label>Seleção para Comunicação</label>
+                    <select class="form-control" ng-model="selecaoComunicacao" ng-options="selecao as selecao.comunicacao for selecao in selecaoComunicacao"></select>
+                  </div>
+                  <div class="col-md-6 col-xs-12 form-group">
+                    <label>Nome Crachá</label>
+                    <input type="text" class="form-control">
+                  </div>
+                  <div class="col-md-6 col-xs-12 form-group">
+                    <label>Classificação</label>
+                    <select class="form-control"></select>
+                  </div>
+                  <div class="col-md-6 col-xs-12 form-group">
+                    <label>Motivo Inativação</label>
+                    <select class="form-control">
+                      <option value="0">Selecione</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6 col-xs-12 form-group">
+                    <label>Data Inativação</label>
+                    <div class="input-group date">
+                      <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                      </div>
+                      <input type="text" class="form-control pull-right" id="datepickerInativacao">
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-xs-12 form-group">
+                    <label>Observação</label>
+                    <input type="text" class="form-control">
+                  </div>
+                  <div class="col-md-12 col-xs-12 form-group">
+                    <div class="row">
+                      <div class="col-md-6 col-xs-12 form-group">
+                        <label>Ativo</label>
+                        <br>
+                        <label><input type="radio" name="optradio"> Sim</label> &nbsp;&nbsp;&nbsp;
+                        <label><input type="radio" name="optradio"> Não</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="box box-info box-solid card">
+              <div class="box-header with-border card-header collapsed" id="contatoHeadingSix" data-toggle="collapse"
+                data-target="#contatoCollapseSix" aria-expanded="false" aria-controls="contatoCollapseSix">
+                <h3 class="box-title">Dados Secretária <i class="fa fa-angle-down"></i></h3>
+              </div>
+              <div id="contatoCollapseSix" class="box-body collapse" aria-labelledby="contatoHeadingSix" data-parent="#contatoAccordion">
+                <div class="col-md-6 col-xs-12 form-group">
+                  <label>Nome Secretária</label>
+                  <input type="text" class="form-control">
+                </div>
+                <div class="col-md-6 col-xs-12 form-group">
+                  <label>DDI</label>
+                  <input type="text" class="form-control">
+                </div>
+                <div class="col-md-6 col-xs-12 form-group">
+                  <label>Email Secretária</label>
+                  <input type="text" class="form-control">
+                </div>
+                <div class="col-md-6 col-xs-12 form-group">
+                  <label>Telefone 1</label>
+                  <div class="row">
+                    <div class="col-md-2 ">
+                      <input type="text" class="form-control" placeholder="00">
+                    </div>
+                    <div class="col-md-6 ">
+                      <input type="text" class="form-control" placeholder="00000-0000">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-xs-12 form-group">
+                  <label>Observação</label>
+                  <input type="text" class="form-control">
+                </div>
+                <div class="col-md-6 col-xs-12 form-group">
+                  <label>Telefone 2</label>
+                  <div class="row">
+                    <div class="col-md-2 ">
+                      <input type="text" class="form-control" placeholder="00">
+                    </div>
+                    <div class="col-md-6 ">
+                      <input type="text" class="form-control" placeholder="00000-0000">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-xs-12 form-group">
+                  <label>Sexo</label>
+                  <br>
+                  <label><input type="radio" name="chkSexoSecretaria"> Masculino</label> &nbsp;&nbsp;&nbsp;
+                  <label><input type="radio" name="chkSexoSecretaria"> Ferminino</label>
+                </div>
+                <div class="col-md-6 col-xs-12 form-group">
+                  <label>Celular 1</label>
+                  <div class="row">
+                    <div class="col-md-2 ">
+                      <input type="text" class="form-control" placeholder="00">
+                    </div>
+                    <div class="col-md-6 ">
+                      <input type="text" class="form-control" placeholder="00000-0000">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12 col-xs-12 form-group">
+                  <div class="row">
+                    <div class="col-md-6 col-xs-12 form-group">
+                      <label>Fax</label>
+                      <div class="row">
+                        <div class="col-md-2 ">
+                          <input type="text" class="form-control" placeholder="00">
+                        </div>
+                        <div class="col-md-6 ">
+                          <input type="text" class="form-control" placeholder="00000-0000">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="box box-info box-solid card" ng-if="edicaoContato()">
+              <div class="box-header with-border card-header collapsed" id="contatoHeadingSeven" data-toggle="collapse"
+                data-target="#contatoCollapseSeven" aria-expanded="false" aria-controls="contatoCollapseSeven">
+                <h3 class="box-title">Grupos de Trabalhos <i class="fa fa-angle-down"></i></h3>
+              </div>
+              <div id="contatoCollapseSeven" class="box-body collapse" aria-labelledby="contatoHeadingSeven"
+                data-parent="#contatoAccordion">
+                <div class="col-md-12 form-group text-right">
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-adicionarGrupoTrabalho"
+                    ng-click="adicionarGrupoTrabalho()"><i class="fa fa-users fa-fw"></i> Adicionar Grupo de Trabalho</button>
+                </div>
+                <div class="col-md-12">
+                  <table id="tblListaGruposTrabalhos" class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Empresa</th>
+                        <th>Grupos</th>
+                        <th>Status</th>
+                        <th>Excluir</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="grupo in pesquisaGruposTrabalhos">
+                        <td>{{grupo.idGrupo | uppercase}}</td>
+                        <td>{{grupo.empresa | uppercase}}</td>
+                        <td>{{grupo.grupos | uppercase}}</td>
+                        <td>{{grupo.status | uppercase}}</td>
+                        <td><a href="" ng-click="excluirContato(grupo.id)" data-toggle="modal" data-target="#modal-excluirGrupoTrabalho"><i
+                              class="fa fa-times"></i></a></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="box box-info box-solid card" ng-if="edicaoContato()">
+              <div class="box-header with-border card-header collapsed" id="contatoHeadingEight" data-toggle="collapse"
+                data-target="#contatoCollapseEight" aria-expanded="false" aria-controls="contatoCollapseEight">
+                <h3 class="box-title">Eventos <i class="fa fa-angle-down"></i></h3>
+              </div>
+              <div id="contatoCollapseEight" class="box-body collapse" aria-labelledby="contatoHeadingEight"
+                data-parent="#contatoAccordion">
+                <div class="col-md-12 form-group text-right">
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-adicionarEventoContato"
+                    ng-click="adicionarEventoContato()"><i class="fa fa-calendar-plus-o fa-fw"></i> Adicionar Evento</button>
+                </div>
+                <div class="col-md-12">
+                  <table id="tblListaEventosContato" class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th>Evento</th>
+                        <th>Categoria</th>
+                        <th>Sub-Categoria</th>
+                        <th>Status Pré Evento</th>
+                        <th>Status Pós Evento</th>
+                        <th>Editar</th>
+                        <th>Excluir</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="evento in pesquisaEventos">
+                        <td>{{evento.evento | uppercase}}</td>
+                        <td>{{evento.categoria | uppercase}}</td>
+                        <td>{{evento.subCategoria | uppercase}}</td>
+                        <td>{{evento.statusPre | uppercase}}</td>
+                        <td>{{evento.statusPos | uppercase}}</td>
+                        <td><a href="" ng-click="editarEventoContato(evento.id)" data-toggle="modal" data-target="#modal-adicionarEventoContato"><i
+                              class="fa fa-edit"></i></a></td>
+                        <td><a href="" ng-click="excluirEventoContato(evento.id)" data-toggle="modal" data-target="#modal-excluirEventoContato"><i
+                              class="fa fa-times"></i></a></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="box box-info box-solid card" ng-if="edicaoContato()">
+              <div class="box-header with-border card-header collapsed" id="contatoHeadingNine" data-toggle="collapse"
+                data-target="#contatoCollapseNine" aria-expanded="false" aria-controls="contatoCollapseNine">
+                <h3 class="box-title">TeleMarketing <i class="fa fa-angle-down"></i></h3>
+              </div>
+              <div id="contatoCollapseNine" class="box-body collapse" aria-labelledby="contatoHeadingNine" data-parent="#contatoAccordion">
+                <div class="col-md-12 form-group text-right">
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-adicionarTelemarketingContato"
+                    ng-click="adicionarTelemarketingContato()"><i class="fa fa-phone fa-fw"></i> Adicionar
+                    Telemarketing</button>
+                </div>
+                <div class="col-md-12">
+                  <table id="tblListaTeleMarketingContato" class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th>Data</th>
+                        <th>Campanha</th>
+                        <th>Status</th>
+                        <th>Agendamento</th>
+                        <th>Finalizado</th>
+                        <th>Usuário</th>
+                        <th>Editar</th>
+                        <th>Excluir</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="telMktContato in pesquisaTeleMarketingContato">
+                        <td>{{telMktContato.data | uppercase}}</td>
+                        <td>{{telMktContato.campanha | uppercase}}</td>
+                        <td>{{telMktContato.status | uppercase}}</td>
+                        <td>{{telMktContato.agendamento | uppercase}}</td>
+                        <td>{{telMktContato.finalizado | uppercase}}</td>
+                        <td>{{telMktContato.usuario | uppercase}}</td>
+                        <td><a href="" ng-click="editarEventoContato(evento.id)" data-toggle="modal" data-target="#modal-adicionarTelemarketingContato"><i
+                              class="fa fa-edit"></i></a></td>
+                        <td><a href="" ng-click="excluirEventoContato(evento.id)" data-toggle="modal" data-target="#modal-excluirTelemarketingContato"><i
+                              class="fa fa-times"></i></a></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="box box-info box-solid card" ng-if="edicaoContato()">
+              <div class="box-header with-border card-header collapsed" id="contatoHeadingTen" data-toggle="collapse"
+                data-target="#contatoCollapseTen" aria-expanded="false" aria-controls="contatoCollapseTen">
+                <h3 class="box-title">Histórico <i class="fa fa-angle-down"></i></h3>
+              </div>
+              <div id="contatoCollapseTen" class="box-body collapse" aria-labelledby="contatoHeadingTen" data-parent="#contatoAccordion">
+                <div class="col-md-12 form-group text-right">
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-adicionarHistoricoContato"
+                    ng-click="adicionarHistoricoContato()"><i class="fa fa-history fa-fw"></i> Adicionar Histórico</button>
+                </div>
+                <div class="col-md-12">
+                  <table id="tblListaHistoricoContato" class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th>Data</th>
+                        <th>Tipo</th>
+                        <th>Campanha</th>
+                        <th>Editar</th>
+                        <th>Excluir</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="historico in pesquisaHistoricoContato">
+                        <td>{{historico.data | uppercase}}</td>
+                        <td>{{historico.tipo | uppercase}}</td>
+                        <td>{{historico.campanha | uppercase}}</td>
+                        <td><a href="" ng-click="editarHistoricoContato(historico.id)" data-toggle="modal" data-target="#modal-adicionarHistoricoContato"><i
+                              class="fa fa-edit"></i></a></td>
+                        <td><a href="" ng-click="excluirHistoricoContato(historico.id)" data-toggle="modal" data-target="#modal-excluirHistoricoContato"><i
+                              class="fa fa-times"></i></a></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="fecharModalContato()">Fechar</button>
+          <button type="button" class="btn btn-primary pull-right" data-dismiss="modal">Salvar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal-adicionarGrupoTrabalho">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Adicionar Grupo de Trabalho</h4>
+        </div>
+        <div class="modal-body row">
+          <div class="col-md-12 form-group">
+            <label>Contato</label>
+            <br>
+            AGUSTÍN SÁNCHEZ VALDIVIA
+            <!-- {{nomeContato}} -->
+          </div>
+          <div class="col-md-6 form-group">
+            <label>Selecione a Empresa</label>
+            <select class="form-control"></select>
+          </div>
+          <div class="col-md-6 form-group">
+            <label>Grupos</label>
+            <select multiple class="form-control"></select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
+          <button type="button" class="btn btn-primary pull-right" data-dismiss="modal">Salvar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal-excluirGrupoTrabalho">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Excluir Grupo de Trabalho</h4>
+        </div>
+        <div class="modal-body">
+          <h3>Tem certeza?</h3>
+          <p>Esta ação não poderá ser desfeita após a confirmação.</p>
+          <div class="col-md-12 form-group" ng-show="false">
+            <label>ID</label>
+            <input type="text" class="form-control" ng-model="idGrupoTrabalho">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Não</button>
+          <button type="button" class="btn btn-primary pull-right" data-dismiss="modal">Sim</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal-adicionarEventoContato">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">{{modalAdicionarEventoContato}}</h4>
+        </div>
+        <div class="modal-body row">
+          <div class="col-md-12 form-group">
+            <label>Evento</label>
+            <select class="form-control"></select>
+          </div>
+          <div class="col-md-6 form-group">
+            <label>Categoria</label>
+            <select class="form-control"></select>
+          </div>
+          <div class="col-md-6 form-group">
+            <label>Sub-Categoria</label>
+            <select class="form-control"></select>
+          </div>
+          <div class="col-md-6 form-group">
+            <label>Status Pré-Evento</label>
+            <select class="form-control"></select>
+          </div>
+          <div class="col-md-6 form-group">
+            <label>Status Pós-Evento</label>
+            <select class="form-control"></select>
+          </div>
+          <div class="col-md-12 form-group">
+            <label>Observação</label>
+            <textarea class="form-control"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
+          <button type="button" class="btn btn-primary pull-right" data-dismiss="modal">Salvar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal-excluirEventoContato">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Excluir Evento</h4>
+        </div>
+        <div class="modal-body">
+          <h3>Tem certeza?</h3>
+          <p>Esta ação não poderá ser desfeita após a confirmação.</p>
+          <div class="col-md-12 form-group" ng-show="false">
+            <label>ID</label>
+            <input type="text" class="form-control" ng-model="idEvento">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Não</button>
+          <button type="button" class="btn btn-primary pull-right" data-dismiss="modal">Sim</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal-adicionarTelemarketingContato">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">{{modalAdicionarEventoContato}}</h4>
+        </div>
+        <div class="modal-body row">
+          <!-- <div class="col-md-12 form-group">
+            <label>Evento</label>
+            <select class="form-control"></select>
+          </div>
+          <div class="col-md-6 form-group">
+            <label>Categoria</label>
+            <select class="form-control"></select>
+          </div>
+          <div class="col-md-6 form-group">
+            <label>Sub-Categoria</label>
+            <select class="form-control"></select>
+          </div>
+          <div class="col-md-6 form-group">
+            <label>Status Pré-Evento</label>
+            <select class="form-control"></select>
+          </div>
+          <div class="col-md-6 form-group">
+            <label>Status Pós-Evento</label>
+            <select class="form-control"></select>
+          </div>
+          <div class="col-md-12 form-group">
+            <label>Observação</label>
+            <textarea class="form-control"></textarea>
+          </div> -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
+          <button type="button" class="btn btn-primary pull-right" data-dismiss="modal">Salvar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal-excluirTelemarketingContato">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Excluir TeleMarketing</h4>
+        </div>
+        <div class="modal-body">
+          <h3>Tem certeza?</h3>
+          <p>Esta ação não poderá ser desfeita após a confirmação.</p>
+          <div class="col-md-12 form-group" ng-show="false">
+            <label>ID</label>
+            <input type="text" class="form-control" ng-model="idEvento">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Não</button>
+          <button type="button" class="btn btn-primary pull-right" data-dismiss="modal">Sim</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal-adicionarHistoricoContato">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">{{modalAdicionarHistoricoContato}}</h4>
+        </div>
+        <div class="modal-body row">
+          <div class="col-md-6 form-group">
+            <label>Tipo</label>
+            <select class="form-control"></select>
+          </div>
+          <div class="col-md-6 form-group">
+            <label>Campanha</label>
+            <select class="form-control"></select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
+          <button type="button" class="btn btn-primary pull-right" data-dismiss="modal">Salvar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal-excluirHistoricoContato">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Excluir Evento</h4>
+        </div>
+        <div class="modal-body">
+          <h3>Tem certeza?</h3>
+          <p>Esta ação não poderá ser desfeita após a confirmação.</p>
+          <div class="col-md-12 form-group" ng-show="false">
+            <label>ID</label>
+            <input type="text" class="form-control" ng-model="idEvento">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Não</button>
+          <button type="button" class="btn btn-primary pull-right" data-dismiss="modal">Sim</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal-adicionarEvento">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">{{modalAdicionarEvento}}</h4>
+        </div>
+        <div class="modal-body row">
+          <div class="col-md-12 form-group">
+            <label>Evento</label>
+            <select class="form-control"></select>
+          </div>
+          <div class="col-md-6 form-group">
+            <label>Categoria</label>
+            <select class="form-control"></select>
+          </div>
+          <div class="col-md-6 form-group">
+            <label>Sub-Categoria</label>
+            <select class="form-control"></select>
+          </div>
+          <div class="col-md-6 form-group">
+            <label>Status Pré-Evento</label>
+            <select class="form-control"></select>
+          </div>
+          <div class="col-md-6 form-group">
+            <label>Status Pós-Evento</label>
+            <select class="form-control"></select>
+          </div>
+          <div class="col-md-12 form-group">
+            <label>Observação</label>
+            <textarea class="form-control"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
+          <button type="button" class="btn btn-primary pull-right" data-dismiss="modal">Salvar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal-excluirEvento">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Excluir Evento</h4>
+        </div>
+        <div class="modal-body">
+          <h3>Tem certeza?</h3>
+          <p>Esta ação não poderá ser desfeita após a confirmação.</p>
+          <div class="col-md-12 form-group" ng-show="false">
+            <label>ID</label>
+            <input type="text" class="form-control" ng-model="idEvento">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Não</button>
+          <button type="button" class="btn btn-primary pull-right" data-dismiss="modal">Sim</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal-adicionarTeleMarketing">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">{{modalAdicionarTeleMarketing}}</h4>
+        </div>
+        <div class="modal-body row">
+          <div class="col-md-6 form-group">
+            <label>Campanha</label>
+            <br>
+            CONGRESSO E EXPOSIÇÃO
+            <!-- {{campanhaTeleMarketing}} -->
+          </div>
+          <div class="col-md-6 form-group">
+            <label>Status</label>
+            <select class="form-control"></select>
+          </div>
+          <div class="col-md-6 form-group">
+            <label>Agendamento</label>
+            <input type="text" id="txtAgendamento" class="form-control">
+          </div>
+          <div class="col-md-6 form-group">
+            <label>Observação</label>
+            <input type="text" class="form-control">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
+          <button type="button" class="btn btn-primary pull-right" data-dismiss="modal">Salvar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal-excluirTeleMarketing">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Excluir Evento</h4>
+        </div>
+        <div class="modal-body">
+          <h3>Tem certeza?</h3>
+          <p>Esta ação não poderá ser desfeita após a confirmação.</p>
+          <div class="col-md-12 form-group" ng-show="false">
+            <label>ID</label>
+            <input type="text" class="form-control" ng-model="idEvento">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Não</button>
+          <button type="button" class="btn btn-primary pull-right" data-dismiss="modal">Sim</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

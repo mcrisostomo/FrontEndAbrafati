@@ -1,0 +1,225 @@
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>Cadastro de Novas Empresas</h1>
+    <ol class="breadcrumb">
+      <li><a href=""><i class="fa fa-home"></i> Home</a></li>
+      <li><a href=""><i class="fa fa-address-book"></i> Inclusão de Cadastro</a></li>
+      <li class="active"><i class="fa fa-building"></i> Cadastro de Empresa</li>
+    </ol>
+  </section>
+  <section class="content">
+    <div class="row">
+      <div class="col-md-12 alert" ng-class="exibeAlerta()" role="alert" ng-if="showAlertBox">
+        <i class="fa fa-fw" ng-class="typeIconMessage()"></i> {{alertMessage}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">Tipo de empresa</h3>
+          </div>
+          <form role="form">
+            <div class="box-body row">
+              <div class="col-md-6 col-xs-12 form-group" ng-repeat="tipo in tipoEmpresa">
+                <label>{{tipo.tipo}}</label>
+                <select class="form-control select2" multiple="multiple" data-placeholder="">
+                  <option value=""></option>
+                  <option ng-repeat="detalhe in tipo.detalhe" value="{{detalhe.id}}">{{detalhe.descricao}}</option>
+                </select>
+              </div>
+              
+              <div class="col-md-6 col-xs-12 form-group">
+                <label>Upload de Logo</label>
+                <input type="file" ng-model="uploadLogo">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">Dados Cadastrais</h3>
+          </div>
+          <form role="form">
+            <div class="box-body row">
+              <div class="col-md-6 col-xs-12 form-group">
+                <label>Razão Social</label>
+                <input type="text" class="form-control" ng-model="razaoSocial">
+              </div>
+              <div class="col-md-6 col-xs-12 form-group">
+                <label>Nome Fantasia</label>
+                <input type="text" class="form-control" ng-model="nomeFantasia">
+              </div>
+              <div class="col-md-6 col-xs-12 form-group">
+                <label>CEP</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="00000-000" ng-model="cep">
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-info btn-flat" ng-click="buscaCep()">Consultar</button>
+                  </span>
+                </div>
+              </div>
+              <div class="col-md-6 col-xs-12 form-group">
+                <label>País</label>
+                <input type="text" class="form-control" ng-model="pais">
+              </div>
+              <div class="col-md-2 col-xs-12 form-group">
+                <label>Tipo Logradouro</label>
+                <input type="text" class="form-control" ng-model="tipoLogradouro">
+              </div>
+              <div class="col-md-4 col-xs-12 form-group">
+                <label>Logradouro</label>
+                <input type="text" class="form-control" ng-model="logradouro">
+              </div>
+              <div class="col-md-3 col-xs-12 form-group" ng-model="numero">
+                <label>Número</label>
+                <input type="text" class="form-control">
+              </div>
+              <div class="col-md-3 col-xs-12 form-group">
+                <label>Complemento</label>
+                <input type="text" class="form-control" ng-model="complemento">
+              </div>
+              <div class="col-md-6 col-xs-12 form-group">
+                <label>Bairro</label>
+                <input type="text" class="form-control" ng-model="bairro">
+              </div>
+              <div class="col-md-3 col-xs-12 form-group">
+                <label>Cidade</label>
+                <input type="text" class="form-control" ng-model="cidade">
+              </div>
+              <div class="col-md-3 col-xs-12 form-group">
+                <label>UF</label>
+                <select class="form-control" ng-model="uf" ng-options="estado as estado.sigla for estado in uf"></select>
+              </div>
+              <div class="col-md-6 col-xs-12 form-group">
+                <label>Internacional</label>
+                <br>
+                <label><input type="radio" name="optint"> Sim</label> &nbsp;&nbsp;&nbsp;
+                <label><input type="radio" name="optint"> Não</label>
+              </div>
+              <div class="col-md-6 col-xs-12 form-group">
+                <label>DDI</label>
+                <input type="text" class="form-control" ng-model="ddi">
+              </div>
+              <div class="col-md-6 col-xs-12 form-group">
+                <label>Telefone 1</label>
+                <div class="row">
+                  <div class="col-md-2">
+                    <input type="text" class="form-control" placeholder="00" ng-model="dddTel1">
+                  </div>
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" placeholder="0000-0000" ng-model="telefone1">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-xs-12 form-group">
+                <label>Telefone 2</label>
+                <div class="row">
+                  <div class="col-md-2">
+                    <input type="text" class="form-control" placeholder="00" ng-model="dddTel2">
+                  </div>
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" placeholder="0000-0000" ng-model="telefone2">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-xs-12 form-group">
+                <label>Celular 1</label>
+                <div class="row">
+                  <div class="col-md-2">
+                    <input type="text" class="form-control" placeholder="00" ng-model="dddCel1">
+                  </div>
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" placeholder="0000-0000" ng-model="celular1">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-xs-12 form-group">
+                <label>Celular 2</label>
+                <div class="row">
+                  <div class="col-md-2">
+                    <input type="text" class="form-control" placeholder="00" ng-model="dddCel2">
+                  </div>
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" placeholder="0000-0000" ng-model="celular2">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-xs-12 form-group">
+                <label>Fax</label>
+                <div class="row">
+                  <div class="col-md-2">
+                    <input type="text" class="form-control" placeholder="00" ng-model="dddFax">
+                  </div>
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" placeholder="0000-0000" ng-model="fax">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-xs-12 form-group">
+                <label>Grupos</label>
+                <select class="form-control" ng-model="tipoGrupo" ng-options="grupo as grupo.tipoGrupo for grupo in gruposEmpresa"></select>
+              </div>
+              <div class="col-md-6 col-xs-12 form-group">
+                <label>Outro Grupo</label>
+                <input type="text" class="form-control" ng-model="outroGrupo" ng-disabled="habilitaOutroGrupo(grupo)">
+              </div>
+              <div class="col-md-6 col-xs-12 form-group">
+                <label>Classificação</label>
+                <select class="form-control" ng-model="classificacao" ng-options="classific as classific.tipoClassificacao for classific in classificacaoGrupo"
+                  ng-disabled="habilitaClassificacao()"></select>
+              </div>
+              <div class="col-md-6 col-xs-12 form-group">
+                <label>Site</label>
+                <input type="text" class="form-control" ng-model="site">
+              </div>
+              <div class="col-md-6 col-xs-12 form-group">
+                <label>Coligada</label>
+                <select class="form-control" ng-model="coligada" ng-options="coligada as coligada.coligada for coligada in coligada"></select>
+              </div>
+              <div class="col-md-6 col-xs-12 form-group">
+                <label>Observação</label>
+                <input type="text" class="form-control" ng-model="observacao">
+              </div>
+              <div class="col-md-6 col-xs-12 form-group">
+                <label>Ativo</label>
+                <select class="form-control" ng-model="ativo" ng-options="ativo as ativo.opcao for ativo in ativo"></select>
+              </div>
+              <div class="col-md-6 col-xs-12 form-group">
+                <label>Motivo Inativação</label>
+                <select class="form-control" ng-model="motivoInativacao" ng-options="motivo as motivo.opcao for motivo in motivoInativacao"></select>
+              </div>
+              <div class="col-md-6 col-xs-12 form-group">
+                <label>Data Inativação</label>
+                <div class="input-group date">
+                  <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                  </div>
+                  <input type="text" class="form-control pull-right" id="datepickerInativacao" ng-model="dataInativacao">
+                </div>
+              </div>
+              <div class="col-md-6 col-xs-12 form-group">
+                <label>LinkedIn</label>
+                <input type="text" class="form-control" ng-model="linkedin">
+              </div>
+              <div class="col-md-6 col-xs-12 form-group">
+                <label>Facebook</label>
+                <input type="text" class="form-control" ng-model="facebook">
+              </div>
+              <!-- <div class="col-md-6 col-xs-12 form-group">
+                <label>CNPJ</label>
+                <input type="text" class="form-control" placeholder="00.000.000/0000-00">
+              </div> -->
+            </div>
+            <div class="box-footer">
+              <button type="button" class="btn btn-primary pull-right" ng-click="incluirNovaEmpresa()"><i class="fa fa-save fa-fw"></i>
+                Salvar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

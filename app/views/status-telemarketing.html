@@ -1,0 +1,102 @@
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>Visualização de Status de Telemarketing</h1>
+    <ol class="breadcrumb">
+      <li><a href=""><i class="fa fa-home"></i> Home</a></li>
+      <li><a href=""><i class="fa fa-table"></i> Tabelas</a></li>
+      <li class="active"><i class="fa fa-phone"></i> Status de Telemarketing</li>
+    </ol>
+  </section>
+
+  <section class="content">
+    <div class="box">
+      <div class="box-header with-border text-right">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-status" ng-click="novoStatus()">
+          <i class="fa fa-plus fa-fw"></i> Incluir Novo Status de Telemarketing
+        </button>
+      </div>
+      <div class="box-body">
+        <table id="tblStatus" class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Descrição</th>
+              <th>Finalizado</th>
+              <th>Agendamento</th>
+              <th>Alterar</th>
+              <th>Excluir</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="status in listaStatus">
+              <td>{{status.id}}</td>
+              <td>{{status.descricao | uppercase}}</td>
+              <td>{{status.finalizado | uppercase}}</td>
+              <td>{{status.agendamento | uppercase}}</td>
+              <td><a href="" ng-click="editarStatus()" data-toggle="modal" data-target="#modal-status"><i class="fa fa-edit"></i></a></td>
+              <td><a href="" ng-click="excluirStatus()" data-toggle="modal" data-target="#excluir-status"><i class="fa fa-times"></i></a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <div class="modal fade" id="modal-status">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">{{tituloModal}}</h4>
+        </div>
+        <div class="modal-body row">
+          <div class="col-md-12" ng-show="false">
+            <label>ID</label>
+            <input type="text" class="form-control" ng-model="idStatus">
+          </div>
+          <div class="col-md-12">
+            <label>Descrição</label>
+            <input type="text" class="form-control" ng-model="descricaoStatus">
+          </div>
+          <div class="col-md-12">
+            <label>Finalizado</label>
+            <br>
+            <label><input type="radio" name="optFinalizado"> Sim</label> &nbsp;&nbsp;&nbsp;&nbsp;
+            <label><input type="radio" name="optFinalizado" checked> Não</label>
+          </div>
+          <div class="col-md-12">
+            <label>Agendamento</label>
+            <br>
+            <label><input type="radio" name="optAgendamento"> Sim</label> &nbsp;&nbsp;&nbsp;&nbsp;
+            <label><input type="radio" name="optAgendamento" checked> Não</label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="fecharModal()">Fechar</button>
+          <button type="button" class="btn btn-primary" ng-click="salvarStatus()">Salvar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="excluir-status">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">{{tituloModal}}</h4>
+        </div>
+        <div class="modal-body">
+          <h3>Tem certeza?</h3>
+          <p>Esta ação não poderá ser desfeita após a confirmação.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Não</button>
+          <button type="button" class="btn btn-primary" ng-click="confirmarExcluirStatus()">Sim</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
