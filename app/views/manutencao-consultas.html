@@ -1,0 +1,101 @@
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>Manutenção de Consultas</h1>
+    <ol class="breadcrumb">
+      <li><a href=""><i class="fa fa-home"></i> Home</a></li>
+      <li><a href=""><i class="fa fa-cogs"></i> Sistema</a></li>
+      <li class="active"><i class="fa fa-wrench"></i> Manutenção de Consultas</li>
+    </ol>
+  </section>
+
+  <section class="content">
+    <div class="box">
+      <div class="box-header with-border text-right">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-consulta" ng-click="novaConsulta()">
+          <i class="fa fa-user-plus fa-fw"></i> Incluir Nova Consulta
+        </button>
+      </div>
+      <div class="box-body">
+        <table id="tblConsultas" class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Descrição</th>
+              <th>Select</th>
+              <th>Editar</th>
+              <th>Excluir</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="consulta in listaConsultas">
+              <td>{{consulta.id | uppercase}}</td>
+              <td>{{consulta.descricao | uppercase}}</td>
+              <td><i class="fa fa-circle" data-toggle="tooltip" data-placement="left" title="{{consulta.select}}"></i></td>
+              <td><a href="" ng-click="editarConsulta(consulta.id, consulta.descricao, consulta.select)" data-toggle="modal" data-target="#modal-consulta"><i
+                    class="fa fa-edit"></i></a></td>
+              <td><a href="" ng-click="excluirConsulta(consulta.id)" data-toggle="modal" data-target="#excluir-consulta"><i
+                    class="fa fa-times"></i></a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <div class="modal fade" id="modal-consulta">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">{{tituloModal}}</h4>
+        </div>
+        <div class="modal-body row">
+          <div class="col-md-12 alert" ng-class="exibeAlerta" role="alert" ng-if="showAlertBox">
+            <i class="fa fa-fw" ng-class="typeIconMessage"></i> {{alertMessage}}
+          </div>
+          <div class="col-md-12 form-group" ng-show="false">
+            <label>ID</label>
+            <input type="text" class="form-control" ng-model="idConsulta">
+          </div>
+          <div class="col-md-12 form-group">
+            <label>Descrição</label>
+            <input type="text" class="form-control" ng-model="descricao">
+          </div>
+          <div class="col-md-12 form-group">
+            <label>Select</label>
+            <textarea class="form-control" rows="10" ng-model="select"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="fecharModal()">Fechar</button>
+          <button type="button" class="btn btn-primary" ng-click="salvarConsulta(idConsulta)">Salvar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="excluir-consulta">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">{{tituloModal}}</h4>
+        </div>
+        <div class="modal-body">
+          <h3>Tem certeza?</h3>
+          <p>Esta ação não poderá ser desfeita após a confirmação.</p>
+          <div class="col-md-12 form-group" ng-show="false">
+            <label>ID</label>
+            <input type="text" class="form-control" ng-model="idConsulta">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Não</button>
+          <button type="button" class="btn btn-primary" ng-click="confirmarExcluirConsulta(idConsulta)">Sim</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

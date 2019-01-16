@@ -1,0 +1,40 @@
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>Próximo Telemarketing</h1>
+    <ol class="breadcrumb">
+      <li><a href=""><i class="fa fa-home"></i> Home</a></li>
+      <li class="active"><a href=""><i class="fa fa-phone"></i> Telemarketing</a></li>
+      <li class="active"><i class="fa fa-forward"></i> Próximo Telemarketing</li>
+    </ol>
+  </section>
+  <section class="content">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">Seleção de Campanha</h3>
+          </div>
+          <form role="form">
+            <div class="box-body row">
+              <div class="col-md-6 col-xs-12 form-group">
+                <label>Campanha</label>
+                <select id="ddlCampanha" class="form-control" data-placeholder="">
+                  <option value=""></option>
+                  <option ng-repeat="campanha in selecaoCampanha" value="{{campanha.id}}">{{campanha.descricao |
+                    uppercase}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="box-footer">
+              <button type="button" class="btn btn-primary pull-right" ng-click="pesquisarCampanha()"><i class="fa fa-search fa-fw"></i>
+                Pesquisar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <ng-include src="'app/views/consulta-empresa.html'" ng-if="resultadoSelecao"></ng-include>
+    <ng-include src="'app/views/consulta-contato.html'" ng-if="resultadoSelecao"></ng-include>
+  </section>
+</div>

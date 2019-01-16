@@ -1,0 +1,40 @@
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>Grupos</h1>
+    <ol class="breadcrumb">
+      <li><a href=""><i class="fa fa-home"></i> Home</a></li>
+      <li class="active"><i class="fa fa-group"></i> Grupos</li>
+    </ol>
+  </section>
+  <section class="content">
+    <div class="box">
+      <div class="box-body">
+        <div class="box-header with-border">
+          <h3 class="box-title">Filtros</h3>
+        </div>
+        <div class="box-body row">
+          <div class="form-group col-md-4">
+            <label>Grupo:</label>
+            <select class="form-control" ng-model="tipoGrupo" ng-options="grupo as grupo.tipoGrupo for grupo in gruposEmpresa"></select>
+          </div>
+          <div class="form-group col-md-4">
+            <label>Classificação:</label>
+            <select class="form-control" ng-model="tipoGrupo" ng-options="classificacao as classificacao.tipoClassificacao for classificacao in classificacaoEmpresa"></select>
+          </div>
+          <div class="form-group col-md-4">
+            <label>Categoria:</label>
+            <select class="form-control" ng-model="tipoGrupo" ng-options="categoria as categoria.tipoCategoria for categoria in categoriaEmpresa"></select>
+          </div>
+          <div class="form-group col-md-4">
+            <label>Empresa/Contato:</label>
+            <br>
+            <label><input type="radio" id="gpr" name="gpr" value="Empresa"> Empresa</label> &nbsp;&nbsp;&nbsp;
+            <label><input type="radio" id="gpr" name="gpr" value="Contato"> Contato</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <ng-include src="'app/views/consulta-empresa.html'"></ng-include>
+  </section>
+</div>

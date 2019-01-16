@@ -1,0 +1,129 @@
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>Buscar Evento</h1>
+    <ol class="breadcrumb">
+      <li><a href=""><i class="fa fa-home"></i> Home</a></li>
+      <li><a href=""><i class="fa fa-calendar"></i> Eventos</a></li>
+      <li class="active"><i class="fa fa-search"></i> Buscar Evento</li>
+    </ol>
+  </section>
+  <section class="content">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">Buscar Evento</h3>
+          </div>
+          <form role="form">
+            <div class="box-body row">
+              <div class="col-md-6 col-xs-12 form-group">
+                <label>Evento</label>
+                <select id="ddlEvento" class="form-control select2" data-placeholder="">
+                  <option value=""></option>
+                  <option ng-repeat="evento in selecaoEvento" value="{{evento.id}}">{{evento.descricao}}</option>
+                </select>
+              </div>
+              <div class="col-md-6 col-xs-12 form-group">
+                <label>Empresa/Contato</label>
+                <p>
+                  <label><input type="radio" name="empresaContato" ng-model="empresaContato" ng-value="true"> Empresa</label> &nbsp;&nbsp;&nbsp;
+                  <label><input type="radio" name="empresaContato" ng-model="empresaContato" ng-value="false"> Contato</label>
+                </p>
+              </div>
+              <div class="col-md-6 col-xs-12 form-group">
+                <label>Status Pré-Evento</label>
+                <select id="ddlStatusPreEvento" class="form-control select2" data-placeholder="" ng-disabled="habilitaCampos()">
+                  <option value=""></option>
+                  <option ng-repeat="preEvento in selecaoPreEvento" value="{{preEvento.id}}">{{preEvento.descricao}}</option>
+                </select>
+              </div>
+              <div class="col-md-6 col-xs-12 form-group">
+                <label>Status Pós-Evento</label>
+                <select id="ddlStatusPosEvento" class="form-control select2" data-placeholder="" ng-disabled="habilitaCampos()">
+                  <option value=""></option>
+                  <option ng-repeat="posEvento in selecaoPosEvento" value="{{posEvento.id}}">{{posEvento.descricao}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="box-footer">
+              <button type="button" class="btn btn-primary pull-right" ng-click="pesquisarGrupo()"><i class="fa fa-search fa-fw"></i>
+                Pesquisar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-md-12" ng-if="resultadoSelecao">
+        <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">Resultado da Busca</h3>
+          </div>
+          <div class="box-body row">
+            <div class="col-md-4 col-xs-12 form-group">
+              <label>Nome do Evento</label>
+              <span class="form-control">{{nomeEvento}}</span>
+            </div>
+            <div class="col-md-4 col-xs-12 form-group">
+              <label>Tipo</label>
+              <span class="form-control">{{tipoEvento}}</span>
+            </div>
+            <div class="col-md-4 col-xs-12 form-group">
+              <label>Local</label>
+              <span class="form-control">{{localEvento}}</span>
+            </div>
+            <div class="col-md-4 col-xs-12 form-group">
+              <label>Data Início</label>
+              <span class="form-control">{{inicioEvento}}</span>
+            </div>
+            <div class="col-md-4 col-xs-12 form-group">
+              <label>Data Fim</label>
+              <span class="form-control">{{finalEvento}}</span>
+            </div>
+            <div class="col-md-4 col-xs-12 form-group">
+              <label>Ativo</label>
+              <span class="form-control">{{eventoAtivo}}</span>
+            </div>
+            <div class="col-md-12 form-group">
+              <label>Descrição</label>
+              <span class="form-control">{{inicioEvento}}</span>
+            </div>
+          </div>
+          <div class="box-footer">
+            <table id="tblEvento" class="table table-bordered table-hover">
+              <thead>
+                <th>Razão Social</th>
+                <th>Nome Fantasia</th>
+                <th>Telefone 1</th>
+                <th>Telefone 2</th>
+                <th>Fax</th>
+                <th>Endereço</th>
+                <th>Cidade</th>
+                <th>Estado</th>
+                <th>UF</th>
+                <th>CEP</th>
+                <th>Site</th>
+                <th>CNPJ</th>
+                <th>Evento</th>
+                <th>Categoria</th>
+                <th>Sub-Categoria</th>
+                <th>Setor</th>
+                <th>M2</th>
+                <th>Pavilhão</th>
+                <th>Mês Venda</th>
+                <th>Tipo Montagem</th>
+                <th>Nº Stand</th>
+                <th>Nome Contato</th>
+                <th>Cargo</th>
+                <th>E-mail</th>
+                <th>Telefone Contato</th>
+                <th>Telefone 2 Contato</th>
+                <th>Observações</th>
+                <th>Ver Dados Empresa</th>
+                <th>Editar Evento</th>
+              </thead>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

@@ -52,7 +52,6 @@
 
 <body class="hold-transition skin-blue sidebar-mini">
   <div class="wrapper">
-    <!-- <div id="header" ng-include="'app/views/header.html'"></div> -->
     <ng-include id="header" src="'app/views/header.html'"></ng-include>
     <ng-include id="nav" src="'app/views/nav-bar.html'"></ng-include>
     <ng-view></ng-view>
@@ -64,13 +63,19 @@
   <script src="app/angular-route.min.js"></script>
   <script src="app/app.js"></script>
   <script src="app/config.js"></script>
+  <script src="app/ngStorage.min.js"></script>
+  <!-- Service -->
+  <script src="app/services/httpServices.js"></script>
   <!-- Controllers -->
   <script src="app/controllers/index-controller.js"></script>
+  <script src="app/controllers/header-controller.js"></script>
   <script src="app/controllers/navbar-controller.js"></script>
   <script src="app/controllers/login-controller.js"></script>
   <script src="app/controllers/forgot-password-controller.js"></script>
   <script src="app/controllers/register-controller.js"></script>
   <script src="app/controllers/home-controller.js"></script>
+  <script src="app/controllers/empresa-grupos-controller.js"></script>
+  <script src="app/controllers/selecao-comite-controller.js"></script>
   <script src="app/controllers/consulta-empresa-controller.js"></script>
   <script src="app/controllers/consulta-contato-controller.js"></script>
   <script src="app/controllers/consulta-secretaria-controller.js"></script>
@@ -78,6 +83,7 @@
   <script src="app/controllers/cadastro-novo-contato-controller.js"></script>
   <script src="app/controllers/novo-evento-controller.js"></script>
   <script src="app/controllers/listar-evento-controller.js"></script>
+  <script src="app/controllers/buscar-evento-controller.js"></script>
   <script src="app/controllers/area-controller.js"></script>
   <script src="app/controllers/campanha-controller.js"></script>
   <script src="app/controllers/campanha-telemarketing-controller.js"></script>
@@ -93,6 +99,11 @@
   <script src="app/controllers/tipo-historico-controller.js"></script>
   <script src="app/controllers/tratamento-controller.js"></script>
   <script src="app/controllers/categoria-empresa-controller.js"></script>
+  <script src="app/controllers/relatorio-controller.js"></script>
+  <script src="app/controllers/cadastro-usuario-controller.js"></script>
+  <script src="app/controllers/alterar-senha-controller.js"></script>
+  <script src="app/controllers/manutencao-consultas-controller.js"></script>
+  <script src="app/controllers/proximo-telemarketing-controller.js"></script>
   <!-- <script src="app/controllers/404-controller.js"></script> -->
   <!-- jQuery 3 -->
   <script src="bower_components/jquery/dist/jquery.min.js"></script>

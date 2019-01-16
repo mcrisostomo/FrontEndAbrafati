@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngRoute']);
+var app = angular.module('app', ['ngRoute','ngStorage','AppServices' ]);
 
 app.config(function ($routeProvider, $locationProvider) {
   $locationProvider.html5Mode(false);
@@ -29,6 +29,16 @@ app.config(function ($routeProvider, $locationProvider) {
       controller: 'home-controller'
     })
 
+    .when('/empresa-grupos', {
+      templateUrl: 'app/views/empresa-grupos.html',
+      controller: 'empresa-grupos-controller'
+    })
+    
+    .when('/selecao-comite', {
+      templateUrl: 'app/views/selecao-comite.html',
+      controller: 'selecao-comite-controller'
+    })
+    
     .when('/cadastro-nova-empresa', {
       templateUrl: 'app/views/cadastro-nova-empresa.html',
       controller: 'cadastro-nova-empresa-controller'
@@ -47,6 +57,11 @@ app.config(function ($routeProvider, $locationProvider) {
     .when('/listar-evento', {
       templateUrl: 'app/views/listar-evento.html',
       controller: 'listar-evento-controller'
+    })
+
+    .when('/buscar-evento', {
+      templateUrl: 'app/views/buscar-evento.html',
+      controller: 'buscar-evento-controller'
     })
 
     .when('/area', {
@@ -122,6 +137,31 @@ app.config(function ($routeProvider, $locationProvider) {
     .when('/categoria-empresa', {
       templateUrl: 'app/views/categoria-empresa.html',
       controller: 'categoria-empresa-controller'
+    })
+    
+    .when('/relatorio', {
+      templateUrl: 'app/views/relatorio.html',
+      controller: 'relatorio-controller'
+    })
+    
+    .when('/cadastro-usuario', {
+      templateUrl: 'app/views/cadastro-usuario.html',
+      controller: 'cadastro-usuario-controller'
+    })
+    
+    .when('/alterar-senha', {
+      templateUrl: 'app/views/alterar-senha.html',
+      controller: 'alterar-senha-controller'
+    })
+
+    .when('/manutencao-consultas', {
+      templateUrl: 'app/views/manutencao-consultas.html',
+      controller: 'manutencao-consultas-controller'
+    })
+
+    .when('/proximo-telemarketing', {
+      templateUrl: 'app/views/proximo-telemarketing.html',
+      controller: 'proximo-telemarketing-controller'
     })
 
     .otherwise('/');

@@ -1,0 +1,75 @@
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>Seleção de Comitês</h1>
+    <ol class="breadcrumb">
+      <li><a href=""><i class="fa fa-home"></i> Home</a></li>
+      <li class="active"><a href=""><i class="fa fa-users"></i> Comitês</a></li>
+      <!-- <li class="active"><i class="fa fa-mouse-pointer"></i> Selecionar Comitês</li> -->
+    </ol>
+  </section>
+  <section class="content">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">Grupos de Trabalhos</h3>
+          </div>
+          <form role="form">
+            <div class="box-body row">
+              <div class="col-md-6 col-xs-12 form-group">
+                <label>Selecione o Grupo</label>
+                <select class="form-control select2" multiple="multiple" data-placeholder="">
+                  <option value=""></option>
+                  <option ng-repeat="comite in selecaoGrupo" value="{{comite.codigo}}">{{comite.descricao}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="box-footer">
+              <button type="button" class="btn btn-primary pull-right" ng-click="pesquisarGrupo()"><i class="fa fa-search fa-fw"></i>
+                Pesquisar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-md-12" ng-if="resultadoSelecao">
+        <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">Você selecionou o(s) grupo(s) {{gruposSelecionados}}</h3>
+          </div>
+          <div class="box-body">
+            <table id="tblComissoes" class="table table-bordered table-hover">
+              <thead>
+                <th>ID</th>
+                <th>Contato</th>
+                <th>Cargo 1ª Empresa</th>
+                <th>1ª Empresa</th>
+                <th>Cargo 2ª Empresa</th>
+                <th>2ª Empresa</th>
+                <th>Título Entidade</th>
+                <th>Nome Entidade</th>
+                <th>Telefone 1</th>
+                <th>Telefone 2</th>
+                <th>Celular 1</th>
+                <th>Celular 2</th>
+                <th>Email 1</th>
+                <th>Email 2</th>
+                <th>Logradouro</th>
+                <th>Complemento</th>
+                <th>Bairro</th>
+                <th>Cidade</th>
+                <th>Estado</th>
+                <th>CEP</th>
+                <th>Sexo</th>
+                <th>Cargo</th>
+                <th>Comissões</th>
+                <th>Ver Dados Contato</th>
+                <th>Ver Dados Empresas</th>
+                <th>Ver Dados Entidade</th>
+              </thead>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

@@ -6,33 +6,26 @@
         <a href="#/home"><i class="fa fa-home"></i> <span>Home</span></a>
       </li>
       <li class="" ng-click="treeviewGrupos()" ng-class="!menuOpenGrupos ? 'treeview' : 'treeview menu-open'">
-        <a href="">
+        <a href="#/empresa-grupos">
           <i class="fa fa-group"></i> <span>Grupos</span>
-          <span class="pull-right-container">
-            <i class="fa fa-angle-left pull-right"></i>
-          </span>
         </a>
-        <ul class="treeview-menu" ng-style="!menuOpenGrupos ? {'display': 'none'} : {'display': 'block'}">
-          <li><a href="#/home"><i class="fa fa-circle-o"></i> Associados</a></li>
-          <li><a href="#/home"><i class="fa fa-circle-o"></i> Não Associados</a></li>
-          <li><a href="#/home"><i class="fa fa-circle-o"></i> Sócios Honorários</a></li>
-          <li><a href="#/home"><i class="fa fa-circle-o"></i> Governo</a></li>
-          <li><a href="#/home"><i class="fa fa-circle-o"></i> Entidades</a></li>
-          <li><a href="#/home"><i class="fa fa-circle-o"></i> Prestadores de Serviço</a></li>
-          <li><a href="#/home"><i class="fa fa-circle-o"></i> Staff</a></li>
-        </ul>
       </li>
-      <li class="" ng-click="treeviewComites()" ng-class="!menuOpenComites ? 'treeview' : 'treeview menu-open'">
-        <a href="">
+      <li class="">
+        <a href="#/selecao-comite">
+          <i class="fa fa-group"></i> <span>Comitês</span>
+        </a>
+      </li>
+      <!-- <li class="" ng-click="treeviewComites()" ng-class="!menuOpenComites ? 'treeview' : 'treeview menu-open'">
+        <a href="#/selecao-comite">
           <i class="fa fa-group"></i> <span>Comitês</span>
           <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
           </span>
         </a>
         <ul class="treeview-menu" ng-style="!menuOpenComites ? {'display': 'none'} : {'display': 'block'}">
-          <li><a href="#/home"><i class="fa fa-circle-o"></i> Selecionar Comitês</a></li>
+          <li><a href="#/selecao-comite"><i class="fa fa-circle-o"></i> Selecionar Comitês</a></li>
         </ul>
-      </li>
+      </li> -->
       <li class="" ng-click="treeviewCadastro()" ng-class="!menuOpenCadastro ? 'treeview' : 'treeview menu-open'">
         <a href="">
           <i class="fa fa-address-book"></i> <span>Inclusão de Cadastro</span>
@@ -56,7 +49,7 @@
         <ul class="treeview-menu" ng-style="!menuOpenEventos ? {'display': 'none'} : {'display': 'block'}">
           <li><a href="#/novo-evento"><i class="fa fa-circle-o"></i> Novo Evento</a></li>
           <li><a href="#/listar-evento"><i class="fa fa-circle-o"></i> Listar Evento</a></li>
-          <li><a href="#/home"><i class="fa fa-circle-o"></i> Buscar Evento</a></li>
+          <li><a href="#/buscar-evento"><i class="fa fa-circle-o"></i> Buscar Evento</a></li>
         </ul>
       </li>
     </ul>
@@ -89,40 +82,27 @@
         </ul>
       </li>
       <li class="treeview">
-        <a href="#/home"><i class="fa fa-dashboard"></i> <span>Relatório</span></a>
+        <a href="#/relatorio"><i class="fa fa-dashboard"></i> <span>Relatório</span></a>
       </li>
-      <li class="treeview">
-        <a href="#/home">
+      <li class="treeview" ng-click="treeviewSistema()" ng-class="!menuOpenSistema ? 'treeview' : 'treeview menu-open'">
+        <a href="">
           <i class="fa fa-cogs"></i> <span>Sistema</span>
           <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
           </span>
         </a>
-        <ul class="treeview-menu">
-          <li><a href="#/home"><i class="fa fa-circle-o"></i> Cadastro de Usuário</a></li>
-          <li><a href="#/home"><i class="fa fa-circle-o"></i> Alteração de Senha</a></li>
-          <li><a href="#/home"><i class="fa fa-circle-o"></i> Manutenção de Consultas</a></li>
+        <ul class="treeview-menu" ng-style="!menuOpenSistema ? {'display': 'none'} : {'display': 'block'}">
+          <li><a href="#/cadastro-usuario"><i class="fa fa-circle-o"></i> Cadastro de Usuário</a></li>
+          <li><a href="#/alterar-senha"><i class="fa fa-circle-o"></i> Alteração de Senha</a></li>
+          <li><a href="#/manutencao-consultas"><i class="fa fa-circle-o"></i> Manutenção de Consultas</a></li>
         </ul>
       </li>
     </ul>
 
     <ul class="sidebar-menu" data-widget="tree">
       <li class="header">TELEMARKETING</li>
-      <li class="treeview">
-        <a href="#/home"><i class="fa fa-check-square"></i> <span>Seleção de Campanha</span></a>
-      </li>
-      <li class="treeview">
-        <a href="#/home">
-          <i class="fa fa-forward"></i> <span>Próximo Telemarketing</span>
-          <span class="pull-right-container">
-            <i class="fa fa-angle-left pull-right"></i>
-          </span>
-        </a>
-        <ul class="treeview-menu">
-          <li><a href="#/home"><i class="fa fa-building"></i> Empresa</a></li>
-          <li><a href="#/home"><i class="fa fa-phone"></i> Contato</a></li>
-        </ul>
-      </li>
+      <li class="">
+        <a href="#/proximo-telemarketing"><i class="fa fa-forward"></i> <span>Próximo Telemarketing</span></a>
       </li>
     </ul>
 
